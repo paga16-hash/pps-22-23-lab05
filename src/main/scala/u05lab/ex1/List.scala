@@ -63,31 +63,13 @@ enum List[A]:
   /** EXERCISES */
   def zipRight : List[(A, Int)] = this.reverse().foldRight(Nil())((a, b) => b.append(List((a, b.length))))
 
-
-  /*def zipRight: List[(A, Int)] =
-    def f(a: A, i: Int) : (A, Int) = (a, i)
-    this match
-      case Nil() => Nil()*/
-      //case h :: t => t.foldRight[List[A]](Nil())((l, e) => (f(l, 0) :: Nil()))
-
-  /*def zipRight: List[(A, Int)] =
+  def partition(pred: A => Boolean): (List[A], List[A]) =
     @tailrec
-    def zipRight2(l: List[A], i: Int) : List[(A, Int)] = l match
-      case Nil() => Nil()
-      case h :: t => zipRight2((h, i) :: Nil(), i + 1)
-    zipRight2(this, 0)*/
-    /*@tailrec
-    def max(l: List[Int], acc: Option[Int]): Option[Int] = (l, acc) match
-      case (Cons(h, t), None()) => max(t, Some(h))
-      case (Cons(h, t), acc) if h > orElse(acc, h) => max(t, Some(h))
-      case (Cons(_, Nil()), _) | (Nil(), _) => acc
-      case (Cons(_, t), acc) => max(t, acc)
-
-    max(l, None())*/
-
-
-
-  def partition(pred: A => Boolean): (List[A], List[A]) = ???
+    def part(a: List[A], b: List[A]) : (List[A], List[A]) = this match
+      case Nil() => (Nil(), Nil())
+      case h :: _ if pred(h) => part(a.append(List(h)), b)
+      case h :: _ => part(a, b.append(List(h)))
+    part(Nil(), Nil())
 
   def span(pred: A => Boolean): (List[A], List[A]) = ???
 
