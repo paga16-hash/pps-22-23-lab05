@@ -2,6 +2,8 @@ package u05lab.ex1
 
 import u05lab.ex1.List
 
+import scala.annotation.tailrec
+
 // Ex 1. implement the missing methods both with recursion or with using fold, map, flatMap, and filters
 // List as a pure interface
 enum List[A]:
@@ -59,7 +61,31 @@ enum List[A]:
   def reverse(): List[A] = foldLeft[List[A]](Nil())((l, e) => e :: l)
 
   /** EXERCISES */
-  def zipRight: List[(A, Int)] = ???
+  def zipRight : List[(A, Int)] = this.reverse().foldRight(Nil())((a, b) => b.append(List((a, b.length))))
+
+
+  /*def zipRight: List[(A, Int)] =
+    def f(a: A, i: Int) : (A, Int) = (a, i)
+    this match
+      case Nil() => Nil()*/
+      //case h :: t => t.foldRight[List[A]](Nil())((l, e) => (f(l, 0) :: Nil()))
+
+  /*def zipRight: List[(A, Int)] =
+    @tailrec
+    def zipRight2(l: List[A], i: Int) : List[(A, Int)] = l match
+      case Nil() => Nil()
+      case h :: t => zipRight2((h, i) :: Nil(), i + 1)
+    zipRight2(this, 0)*/
+    /*@tailrec
+    def max(l: List[Int], acc: Option[Int]): Option[Int] = (l, acc) match
+      case (Cons(h, t), None()) => max(t, Some(h))
+      case (Cons(h, t), acc) if h > orElse(acc, h) => max(t, Some(h))
+      case (Cons(_, Nil()), _) | (Nil(), _) => acc
+      case (Cons(_, t), acc) => max(t, acc)
+
+    max(l, None())*/
+
+
 
   def partition(pred: A => Boolean): (List[A], List[A]) = ???
 

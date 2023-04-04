@@ -9,7 +9,6 @@ class ListTest {
   /** todo */
   @Test
   def testZipRight(): Unit =
-    val l = 10 :: 20 :: 30 :: Nil()
-    assertEquals((10, 0) :: (20, 0) :: (30, 0) :: Nil(), l.zipRight)
-    //assertEquals(Cons("10", Cons("20", Cons("30", Nil()))), map(l)(_ + ""))
+    val l = 10 :: 20 :: 30 :: 40 :: Nil()
+    assertEquals((10, 0) :: (20, 1) :: (30, 2) :: (40, 3) :: Nil(), l.zipRight)
 }
