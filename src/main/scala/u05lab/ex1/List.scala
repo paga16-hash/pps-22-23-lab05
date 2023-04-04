@@ -82,8 +82,10 @@ enum List[A]:
 
   /** @throws UnsupportedOperationException if the list is empty */
   def reduce(op: (A, A) => A): A = ???
+    //this.foldRight(Nil())(op)
 
-  def takeRight(n: Int): List[A] = ???
+  def takeRight(n: Int): List[A] =
+    ???
 
 // Factories
 object List:

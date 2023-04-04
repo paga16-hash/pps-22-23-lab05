@@ -25,4 +25,10 @@ class ListTest {
     val l1 = 10 :: 20 :: Nil()
     val l2 = 31 :: 40 :: Nil()
     assertEquals((l1, l2), l.span(_ % 2 == 0))
+
+  @Test
+  def testTakeRight(): Unit =
+    val l = 10 :: 20 :: 30 :: 40 :: Nil()
+    val l1 = 30 :: 40 :: Nil()
+    assertEquals(l1, l.takeRight(2))
 }
