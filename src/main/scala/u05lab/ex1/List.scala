@@ -65,13 +65,20 @@ enum List[A]:
 
   def partition(pred: A => Boolean): (List[A], List[A]) =
     @tailrec
-    def part(a: List[A], b: List[A]) : (List[A], List[A]) = this match
-      case Nil() => (Nil(), Nil())
-      case h :: _ if pred(h) => part(a.append(List(h)), b)
-      case h :: _ => part(a, b.append(List(h)))
-    part(Nil(), Nil())
+    def part(l: List[A], a: List[A], b: List[A]) : (List[A], List[A]) = l match
+      case h :: t if pred(h) => part(t, a.append(List(h)), b)
+      case h :: t => part(t, a, b.append(List(h)))
+      case Nil() => (a, b)
+    part(this, Nil(), Nil())
 
-  def span(pred: A => Boolean): (List[A], List[A]) = ???
+  def span(pred: A => Boolean): (List[A], List[A]) =
+    @tailrec
+    def pSpan(l: List[A], a: List[A], b: List[A], split: Boolean): (List[A], List[A]) = l match
+      case h :: t if pred(h) && !split => pSpan(t, a.append(List(h)), b, false)
+      case h :: t => pSpan(t, a, b.append(List(h)), true)
+      case Nil() => (a, b)
+
+    pSpan(this, Nil(), Nil(), false)
 
   /** @throws UnsupportedOperationException if the list is empty */
   def reduce(op: (A, A) => A): A = ???

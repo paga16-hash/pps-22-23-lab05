@@ -15,5 +15,14 @@ class ListTest {
   @Test
   def testPartition(): Unit =
     val l = 10 :: 21 :: 30 :: 41 :: Nil()
-    assertEquals((10 :: 30 :: Nil(), 21 :: 41 :: Nil()), l.partition(_ % 2 == 0))
+    val even = 10 :: 30 :: Nil()
+    val odd = 21 :: 41 :: Nil()
+    assertEquals((even, odd), l.partition(_ % 2 == 0))
+
+  @Test
+  def testSpan(): Unit =
+    val l = 10 :: 20 :: 31 :: 40 :: Nil()
+    val l1 = 10 :: 20 :: Nil()
+    val l2 = 31 :: 40 :: Nil()
+    assertEquals((l1, l2), l.span(_ % 2 == 0))
 }
