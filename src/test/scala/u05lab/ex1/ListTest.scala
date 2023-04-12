@@ -27,6 +27,11 @@ class ListTest {
     assertEquals((l1, l2), l.span(_ % 2 == 0))
 
   @Test
+  def testReduce(): Unit =
+    val l = 10 :: 20 :: 30 :: 40 :: Nil()
+    assertEquals(100, l.reduce(_ + _))
+
+  @Test
   def testTakeRight(): Unit =
     val l = 10 :: 20 :: 30 :: 40 :: Nil()
     val l1 = 30 :: 40 :: Nil()

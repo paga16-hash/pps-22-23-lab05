@@ -81,11 +81,12 @@ enum List[A]:
     pSpan(this, Nil(), Nil(), false)
 
   /** @throws UnsupportedOperationException if the list is empty */
-  def reduce(op: (A, A) => A): A = ???
-    //this.foldRight(Nil())(op)
+  def reduce(op: (A, A) => A): A = this match
+    case h :: Nil() => h
+    case h :: t => op(h, t.reduce(op))
+    case Nil() => throw UnsupportedOperationException()
 
-  def takeRight(n: Int): List[A] =
-    ???
+  def takeRight(n: Int): List[A] = ???
 
 // Factories
 object List:
